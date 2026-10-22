@@ -2,7 +2,7 @@
 	"name": "asm51-ide",
 	"displayName": "ASM51 IDE",
 	"description": "Single-file 8051 assembly IDE: compile with the bundled ASEM-51 assembler and flash with one click.",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"publisher": "thomasmore",
 	"license": "SEE LICENSE IN README.md",
 	"engines": {
