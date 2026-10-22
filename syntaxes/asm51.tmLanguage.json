@@ -1,0 +1,27 @@
+{
+	"scopeName": "source.asm51",
+	"name": "8051 Assembly",
+	"patterns": [
+		{ "match": ";.*$", "name": "comment.line.semicolon.asm51" },
+		{ "match": "^\\s*[#$]\\s*\\w+", "name": "meta.preprocessor.asm51" },
+		{ "match": "\"[^\"]*\"|'[^']*'", "name": "string.quoted.asm51" },
+		{ "match": "^\\s*([A-Za-z_?][\\w?]*)\\s*:", "captures": { "1": { "name": "entity.name.function.label.asm51" } } },
+		{
+			"match": "\\b(?:org|end|equ|set|bit|data|idata|xdata|code|db|dw|ds|dbit|cseg|dseg|iseg|xseg|bseg|using|if|else|endif|macro|endm|segment|public|extrn|name|reg)\\b",
+			"name": "keyword.directive.asm51"
+		},
+		{
+			"match": "\\b(?:acall|add|addc|ajmp|anl|cjne|clr|cpl|da|dec|div|djnz|inc|jb|jbc|jc|jmp|jnb|jnc|jnz|jz|lcall|ljmp|mov|movc|movx|mul|nop|orl|pop|push|ret|reti|rl|rlc|rr|rrc|setb|sjmp|subb|swap|xch|xchd|xrl)\\b",
+			"name": "keyword.control.instruction.asm51"
+		},
+		{
+			"match": "\\b(?:a|b|ab|c|dptr|pc|sp|r[0-7]|acc|psw|p[0-3]|tcon|tmod|th[01]|tl[01]|scon|sbuf|ie|ip)\\b",
+			"name": "variable.language.register.asm51"
+		},
+		{
+			"match": "(?<![\\w.])(?:[0-9][0-9a-fA-F]*[hH]|[a-fA-F][0-9a-fA-F]*[hH]|[01]+[bB]|[0-7]+[oOqQ]|[0-9]+[dD]?)(?![\\w])",
+			"name": "constant.numeric.asm51"
+		},
+		{ "match": "#", "name": "keyword.operator.immediate.asm51" }
+	]
+}

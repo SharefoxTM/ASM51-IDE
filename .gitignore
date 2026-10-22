@@ -1,0 +1,18 @@
+# Local dependencies and editor settings
+node_modules/
+.vscode/
+
+# Generated extension package
+*.vsix
+
+# Assembler output
+*.hex
+*.lst
+
+# Backup source tree
+/lsd-source-backup/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,173 @@
+{
+	"name": "asm51-ide",
+	"displayName": "ASM51 IDE",
+	"description": "Single-file 8051 assembly IDE: compile with the bundled ASEM-51 assembler and flash with one click.",
+	"version": "1.0.0",
+	"publisher": "thomasmore",
+	"license": "SEE LICENSE IN README.md",
+	"engines": {
+		"vscode": "^1.80.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Other"
+	],
+	"main": "./extension.js",
+	"activationEvents": [
+		"onLanguage:asm51",
+		"onCommand:asm51.viewHex",
+		"onCustomEditor:asm51.hexViewer",
+		"onStartupFinished"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "asm51",
+				"aliases": [
+					"8051 Assembly",
+					"ASM51"
+				],
+				"extensions": [
+					".asm",
+					".a51",
+					".inc"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "asm51",
+				"scopeName": "source.asm51",
+				"path": "./syntaxes/asm51.tmLanguage.json"
+			}
+		],
+		"commands": [
+			{
+				"command": "asm51.compile",
+				"title": "ASM51: Compile",
+				"icon": "$(play)"
+			},
+			{
+				"command": "asm51.flash",
+				"title": "ASM51: Compile and Flash",
+				"icon": "$(zap)"
+			},
+			{
+				"command": "asm51.selectPort",
+				"title": "ASM51: Select Serial Port"
+			},
+			{
+				"command": "asm51.checkInstall",
+				"title": "ASM51: Check Installation"
+			},
+			{
+				"command": "asm51.viewHex",
+				"title": "ASM51: View Hex File",
+				"icon": "$(file-binary)"
+			}
+		],
+		"customEditors": [
+			{
+				"viewType": "asm51.hexViewer",
+				"displayName": "Intel HEX Viewer",
+				"selector": [
+					{
+						"filenamePattern": "*.hex"
+					}
+				],
+				"priority": "option"
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"command": "asm51.viewHex",
+					"when": "resourceExtname == .hex && activeCustomEditorId != asm51.hexViewer",
+					"group": "navigation@1"
+				},
+				{
+					"command": "asm51.compile",
+					"when": "resourceLangId == asm51",
+					"group": "navigation@1"
+				},
+				{
+					"command": "asm51.flash",
+					"when": "resourceLangId == asm51",
+					"group": "navigation@2"
+				}
+			]
+		},
+		"keybindings": [
+			{
+				"command": "asm51.compile",
+				"key": "f7",
+				"when": "editorLangId == asm51"
+			},
+			{
+				"command": "asm51.flash",
+				"key": "f8",
+				"when": "editorLangId == asm51"
+			}
+		],
+		"configuration": {
+			"title": "ASM51 IDE",
+			"properties": {
+				"asm51.flash.toolPath": {
+					"type": "string",
+					"default": "",
+					"description": "Path to your own flash tool. Leave empty to use the bundled lsd flasher (recommended)."
+				},
+				"asm51.flash.args": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": [
+						"${hex}"
+					],
+					"description": "Only used with a custom flash tool. Arguments for the tool. Placeholders: ${hex} (Intel HEX file), ${port} (serial port, e.g. COM3), ${file} (source file)."
+				},
+				"asm51.flash.port": {
+					"type": "string",
+					"default": "",
+					"description": "Serial port used for flashing (e.g. COM3). Leave empty to pick one from a list each time."
+				},
+				"asm51.flash.run": {
+					"type": "boolean",
+					"default": true,
+					"description": "Start the program on the board right after downloading (bundled flasher only)."
+				},
+				"asm51.assemblerPath": {
+					"type": "string",
+					"default": "",
+					"description": "Optional path to your own ASEM-51 executable (needed on non-x86 systems, e.g. ARM Linux). Leave empty to use the bundled one."
+				},
+				"asm51.includePaths": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": [],
+					"description": "Extra folders searched for #include files (the folder of the source file and the bundled aducgd include files are always searched)."
+				},
+				"asm51.compileOnSave": {
+					"type": "boolean",
+					"default": false,
+					"description": "Compile automatically when an assembly file is saved."
+				}
+			}
+		},
+		"configurationDefaults": {
+			"[asm51]": {
+				"editor.insertSpaces": false,
+				"editor.tabSize": 8,
+				"editor.detectIndentation": false,
+				"editor.formatOnSave": false,
+				"editor.formatOnType": false,
+				"editor.formatOnPaste": false,
+				"files.autoSave": "onFocusChange"
+			}
+		}
+	}
+}

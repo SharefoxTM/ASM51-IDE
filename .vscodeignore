@@ -1,0 +1,4 @@
+.vscode/**
+test/**
+*.vsix
+lsd-source-backup/**
